@@ -11,7 +11,7 @@ const Login = () => {
     e.preventDefault();
   
     try {
-      const res = await axios.post('http://localhost:4000/api/usuarios/login', { correo, password });
+      const res = await axios.post('https://proyectomern.onrender.com/api/usuarios/login', { correo, password });
       if (res.data.token) {
         localStorage.setItem('token', res.data.token); 
         navigate('/ListaUsuarios'); 
@@ -33,7 +33,7 @@ const Login = () => {
         {/* Logo */}
         <div className="text-center mb-3">
           <img 
-            src="http://localhost:4000/img/logo.png" 
+            src="https://proyectomern.onrender.com/img/logo.png" 
             alt="Logo" 
             style={{ width: '120px', height: 'auto' }} 
           />
