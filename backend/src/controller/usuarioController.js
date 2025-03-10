@@ -1,10 +1,16 @@
-const usuarioCtrl = {};
-const Usuario = require('../models/usuario');
-const fs = require('fs');
+const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
+const Usuario = require('../models/usuario');
+
+const usuarioCtrl = {};
+const app = express();
+
+// Servir archivos estáticos desde la carpeta "public/img"
+app.use('/img', express.static(path.join(__dirname, '../public/img')));
 
 // Definir el almacenamiento de archivos para Multer
 const storage = multer.diskStorage({
@@ -18,8 +24,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// Clave secreta para JWT
-const SECRET_KEY = 'tu_clave_secreta'; // Usa una clave segura en variables de entorno
+// Clave secreta para JWT (usar variable de entorno en producción)
+const SECRET_KEY = process.env.SECRET_KEY || 'tu_clave_secreta';
 
 // Obtener todos los usuarios
 usuarioCtrl.getUsu = async (req, res) => {
@@ -36,6 +42,7 @@ usuarioCtrl.getUsu = async (req, res) => {
     res.status(500).json({ message: 'Error al obtener los usuarios', error: error.message });
   }
 };
+
 
 // Obtener un usuario por ID
 usuarioCtrl.getUsuById = async (req, res) => {
