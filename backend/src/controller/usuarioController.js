@@ -28,8 +28,8 @@ usuarioCtrl.getUsu = async (req, res) => {
     const usuariosConFoto = usuarios.map(usuario => ({
       ...usuario._doc,
       foto: usuario.foto
-        ? `https://proyectomern.onrender.com/backend/src/img/${usuario.foto}`
-        : `https://proyectomern.onrender.com/backend/src/img/noFoto.png`,
+        ? `https://proyectomern.onrender.com/img/${usuario.foto}`
+        : `https://proyectomern.onrender.com/img/noFoto.png`,
     }));
     res.json(usuariosConFoto);
   } catch (error) {
